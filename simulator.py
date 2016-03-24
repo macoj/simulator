@@ -10,6 +10,14 @@ class Simulator:
 
     @staticmethod
     def execute(commands, number_of_processes=2, delay_between=2, output_dir=None):
+        """
+            Executes commands in parallel at the maximum number_of_processes commands at time.
+        :param commands: A list of strings containing the commands that should be executed.
+        :param number_of_processes: The number maximum of processes running in parallel.
+        :param delay_between: The delay between each check if a process ended or not.
+        :param output_dir: The directory in which the helper files will be stored and eventually removed (default: '.').
+        :return: None
+        """
         if not output_dir:
             output_dir = "."
         if number_of_processes > len(commands):
@@ -63,40 +71,3 @@ class Simulator:
         for index in pairs_indices:
             _, touch = pairs_and_files[index]
             os.system("rm " + touch + " 2> /dev/null")
-
-    @staticmethod
-    def pso():
-        """
-        PSO.jar runs particles evaluations dimensions function topology mechanism [mechanism_parameter]
-        > TOPOLOGY
-         0: GLOBAL 1: RING 2: RANDOM 3: VON_NEUMANN 4: THREESOME_PARTNERS 5: NSOME_PARTNERS
-        > MECHANISM
-         0: NONE 1: DYNAMIC_2011
-        """
-        commands = []
-        topologies = [("global", 0), ("ring", 1), ("vonneumann", 3)]
-        runs = 30
-        functions = range(1, 21)
-        evaluations = 1000000
-        dimensions = 1000
-        particles = 100
-        for topology in topologies:
-            for function in functions:
-                commands += ["java -jar PSO/jar/pso.jar 1 %d %d %d %d %d 0 > %s_F%02d_%02d.teste " %
-                             (particles, evaluations, dimensions, function, topology[1],
-                             topology[0], function, r) for r in range(runs)]
-        # dynamic topology
-        topologies = [("ring", 1)]
-        functions = range(10, 21)
-        for topology in topologies:
-            for function in functions:
-                    commands += ["java -jar PSO/jar/pso.jar 1 %d %d %d %d %d 1 > dynamic%s_F%02d_%02d.teste " %
-                                 (particles, evaluations, dimensions, function, topology[1],
-                                 topology[0], function, r) for r in range(runs)]
-        return commands
-"""
-execfile("simulator.py")
-Simulator.execute(Simulator.pso(), number_of_processes=10, delay_between=5)
-Simulator.pso()
-range(10, 21)
-"""
