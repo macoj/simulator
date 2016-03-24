@@ -10,8 +10,7 @@ class Simulator:
 
     @staticmethod
     def execute(commands, number_of_processes=2, delay_between=2, output_dir=None):
-        """
-            Executes commands in parallel at the maximum number_of_processes commands at time.
+        """ Executes commands in parallel at the maximum number_of_processes commands at time.
         :param commands: A list of strings containing the commands that should be executed.
         :param number_of_processes: The number maximum of processes running in parallel.
         :param delay_between: The delay between each check if a process ended or not.
