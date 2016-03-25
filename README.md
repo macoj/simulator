@@ -7,4 +7,8 @@ execfile("simulator.py")
 commands = ["ping -c 10 %s > /dev/null" % h for h in ["www.google.com", "www.twitter.com", "www.github.com"]] * 10
 Simulator.execute(commands, number_of_processes=20, delay_between=1)
 ```
-This tool checks periodically whether a process has finished or not, when a process finishes, another command runs. The parameter `delay_between` is the time in seconds which the main process sleeps until this check is performed again. The value of this parameter depends on the expected time that the commands will take to finish. The longer they take, the higher `delay_between` should be.  
+This tool checks periodically whether a process has finished or not, when a process finishes, another command runs. The parameter `delay_between` is the time in seconds which the main process sleeps until this check is performed again. The value of this parameter depends on the expected time that the commands will take to finish. The longer they take, the higher `delay_between` should be.
+  
+# TODO
+* Different behavior depending on the return of a command.
+* An interface showing time spent by each command and the commands in line.

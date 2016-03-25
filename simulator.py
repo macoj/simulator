@@ -31,7 +31,7 @@ class Simulator:
             _, touch = pairs_and_files[index]
             os.system("rm " + touch + " 2> /dev/null")
         threads_started = []
-        # pairs_indices can change through the iterations because we can try to retrieve data again
+        # pairs_indices *would* change through the iterations because we can try to retrieve data again
         for index in pairs_indices:
             command, touch = pairs_and_files[index]
             os.system('( ' + command + ' ; touch ' + touch + ' ) &')
@@ -50,11 +50,6 @@ class Simulator:
                 time.sleep(delay_between)
             print "> finished [%d]" % thread_done
             threads_started.remove(thread_done)
-            # total_executed += len(threads_started)
-            # sys.stdout.write("%d/%d/%d " % (len(threads_started), total_executed, len(commands)))
-            # sys.stdout.flush()
-            # threads_started = []
-        # for _, touch in pairs_and_files
         while threads_started:
             threads_done = []
             for thread in threads_started:
